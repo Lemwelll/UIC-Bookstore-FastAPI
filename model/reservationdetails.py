@@ -10,9 +10,9 @@ ReservationdetailsRouter = APIRouter(tags=["Reservation Details"])
 async def read_reservations(
     db=Depends(get_db)
 ):
-    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID FROM reservationdetails"
+    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID, items FROM reservationdetails"
     db[0].execute(query)
-    reservations = [{"reservationdetailsID": reservation[0], "createDate": reservation[1], "expiryDate": reservation[2], "numofItems": reservation[3], "totalAmount": reservation[4], "studentID": reservation[5]} for reservation in db[0].fetchall()]
+    reservations = [{"reservationdetailsID": reservation[0], "createDate": reservation[1], "expiryDate": reservation[2], "numofItems": reservation[3], "totalAmount": reservation[4], "studentID": reservation[5], "items": reservation[6]} for reservation in db[0].fetchall()]
     return reservations
 
 @ReservationdetailsRouter.get("/reservationdetails/{reservation_id}", response_model=dict)
@@ -20,11 +20,11 @@ async def read_reservation_by_id(
     reservation_id: int, 
     db=Depends(get_db)
 ):
-    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID FROM reservationdetails WHERE reservationID = %s"
+    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID, items FROM reservationdetails WHERE reservationID = %s"
     db[0].execute(query, (reservation_id,))
     reservationdetails = db[0].fetchone()
     if reservationdetails:
-        return {"reservationdetailsID": reservationdetails[0], "createDate": reservationdetails[1], "expiryDate": reservationdetails[2], "numofItems": reservationdetails[3], "totalAmount": reservationdetails[4], "studentID": reservationdetails[5]}
+        return {"reservationdetailsID": reservationdetails[0], "createDate": reservationdetails[1], "expiryDate": reservationdetails[2], "numofItems": reservationdetails[3], "totalAmount": reservationdetails[4], "studentID": reservationdetails[5], "items": reservationdetails[6]}
     raise HTTPException(status_code=404, detail="Reservation not found")
 
 @ReservationdetailsRouter.post("/reservationdetails/", response_model=dict)
@@ -34,10 +34,11 @@ async def create_reservation(
     numofItems: int = Form(...),
     totalAmount: int = Form(...),
     studentID: int = Form(...),
+    items: str = Form(...),
     db=Depends(get_db)
 ):
-    query = "INSERT INTO reservationdetails (createDate, expiryDate, numofItems, totalAmount, studentID) VALUES (%s, %s, %s, %s, %s)"
-    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID))
+    query = "INSERT INTO reservationdetails (createDate, expiryDate, numofItems, totalAmount, studentID, items) VALUES (%s, %s, %s, %s, %s, %s)"
+    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, items))
     db[1].commit()
 
     # Retrieve the last inserted ID using LAST_INSERT_ID()
@@ -49,7 +50,8 @@ async def create_reservation(
         "expiryDate": expiryDate,
         "numofItems": numofItems,
         "totalAmount": totalAmount,
-        "studentID": studentID
+        "studentID": studentID,
+        "items": items
     }
 
 @ReservationdetailsRouter.put("/reservationdetails/{reservationdetailsID}", response_model=dict)
@@ -60,10 +62,11 @@ async def update_reservation(
     numofItems: int = Form(...),
     totalAmount: int = Form(...),
     studentID: int = Form(...),
+    items: str = Form(...),
     db=Depends(get_db)
 ):
-    query = "UPDATE reservationdetails SET createDate = %s, expiryDate = %s, numofItems = %s, totalAmount = %s, studentID = %s WHERE reservationdetailsID = %s"
-    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, reservationdetailsID))
+    query = "UPDATE reservationdetails SET createDate = %s, expiryDate = %s, numofItems = %s, totalAmount = %s, studentID = %s, items = %s WHERE reservationdetailsID = %s"
+    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, items, reservationdetailsID))
 
     # Check if the update was successful
     if db[0].rowcount > 0:

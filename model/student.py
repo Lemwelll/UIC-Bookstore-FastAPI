@@ -10,9 +10,9 @@ StudentRouter = APIRouter(tags=["Student"])
 async def read_students(
     db=Depends(get_db)
 ):
-    query = "SELECT studentID, firstName, lastName, uicEmail FROM student"
+    query = "SELECT studentID, firstName, lastName, uicEmail, password FROM student"
     db[0].execute(query)
-    students = [{"studentID": student[0], "firstName": student[1], "lastName": student[2], "uicEmail": student[3]} for student in db[0].fetchall()]
+    students = [{"studentID": student[0], "firstName": student[1], "lastName": student[2], "uicEmail": student[3], "password": student[4]} for student in db[0].fetchall()]
     return students
 
 @StudentRouter.get("/student/{student_id}", response_model=dict)
@@ -20,29 +20,44 @@ async def read_student(
     student_id: int, 
     db=Depends(get_db)
 ):
-    query = "SELECT studentID, firstName, lastName, uicEmail FROM student WHERE studentID = %s"
-    db[0].execute(query, (student_id,))
+    query = "SELECT studentID, firstName, lastName, uicEmail, password FROM student WHERE studentID = %s"
+    db[0].execute(query, (uicEmail, password))
     student = db[0].fetchone()
     if student:
-        return {"studentID": student[0], "firstName": student[1], "lastName": student[2], "uicEmail": student[3]}
+        return {"studentID": student[0], "firstName": student[1], "lastName": student[2], "uicEmail": student[3], "password": student[4]}
     raise HTTPException(status_code=404, detail="Student not found")
+
+@StudentRouter.post("/student/login", response_model=dict)
+async def login_student(
+    uicEmail: str = Form(...),
+    password: str = Form(...),
+    db=Depends(get_db)
+):
+    query = "SELECT studentID, firstName, lastName, uicEmail, password FROM student WHERE uicEmail = %s AND password = %s"
+    db[0].execute(query, (uicEmail, password))
+    student = db[0].fetchone()
+    if student:
+        return {"studentID": student[0], "firstName": student[1], "lastName": student[2], "uicEmail": student[3], "password": student[4]}
+    else:
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
 
 @StudentRouter.post("/student/", response_model=dict)
 async def create_student(
     firstName: str = Form(...),
     lastName: str = Form(...),
     uicEmail: str = Form(...),
+    password: str = Form(...),
     db=Depends(get_db)
 ):
-    query = "INSERT INTO student (firstName, lastName, uicEmail) VALUES (%s, %s, %s)"
-    db[0].execute(query, (firstName, lastName, uicEmail))
+    query = "INSERT INTO student (firstName, lastName, uicEmail, password) VALUES (%s, %s, %s, %s)"
+    db[0].execute(query, (firstName, lastName, uicEmail, password))
     db[1].commit()
 
     # Retrieve the last inserted ID using LAST_INSERT_ID()
     db[0].execute("SELECT LAST_INSERT_ID()")
     new_student_id = db[0].fetchone()[0]
 
-    return {"studentID": new_student_id, "firstName": firstName, "lastName": lastName, "uicEmail": uicEmail}
+    return {"studentID": new_student_id, "firstName": firstName, "lastName": lastName, "uicEmail": uicEmail, "password": password}
 
 @StudentRouter.put("/student/{student_id}", response_model=dict)
 async def update_student(
@@ -50,10 +65,11 @@ async def update_student(
     firstName: str = Form(...),
     lastName: str = Form(...),
     uicEmail: str = Form(...),
+    password: str = Form(...),
     db=Depends(get_db)
 ):
-    query = "UPDATE student SET firstName = %s, lastName = %s, uicEmail = %s WHERE studentID = %s"
-    db[0].execute(query, (firstName, lastName, uicEmail, student_id))
+    query = "UPDATE student SET firstName = %s, lastName = %s, uicEmail = %s, password = %s WHERE studentID = %s"
+    db[0].execute(query, (firstName, lastName, uicEmail, password, student_id))
 
     # Check if the update was successful
     if db[0].rowcount > 0:

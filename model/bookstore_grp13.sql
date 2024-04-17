@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2024 at 03:43 PM
+-- Generation Time: Apr 17, 2024 at 05:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,8 +74,8 @@ INSERT INTO `book` (`mngstore`, `bookID`, `mngbkstore`, `bookTitle`, `bookquanti
 ('test4', 4, '44', 'testdev4', 4, 444),
 ('test5', 5, '55', 'testdev5', 5, 555),
 ('test5', 7, 'dsada', 'dsadsad', 123, 2112),
-('test1', 8, 'dsad', 'dsadsaddsadadasd', 123, 2112),
-('test1', 9, 'dsd', 'asdasd', 123, 21312);
+('test1', 8, 'dsad', 'dsadsaddsadadasd', 123, 2112);
+
 -- --------------------------------------------------------
 
 --
@@ -95,7 +95,6 @@ CREATE TABLE `bookdetails` (
 
 INSERT INTO `bookdetails` (`bookreservationID`, `reservationdetailsID`, `bookID`, `bookQuantity`) VALUES
 (1, 3, 1, 11),
-(2, 4, 2, 22),
 (3, 5, 8, 33),
 (4, 1, 5, 44),
 (5, 2, 7, 55);
@@ -133,19 +132,21 @@ CREATE TABLE `reservationdetails` (
   `expiryDate` date NOT NULL,
   `numofItems` int(11) NOT NULL,
   `totalAmount` int(11) NOT NULL,
-  `studentID` int(11) NOT NULL
+  `studentID` int(11) NOT NULL,
+  `items` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reservationdetails`
 --
 
-INSERT INTO `reservationdetails` (`reservationdetailsID`, `createDate`, `expiryDate`, `numofItems`, `totalAmount`, `studentID`) VALUES
-(1, '2024-03-12', '2024-03-08', 1, 1, 9),
-(2, '2024-03-13', '2024-03-08', 2, 33, 9),
-(3, '2024-03-06', '2024-03-09', 3, 3, 9),
-(4, '2024-03-08', '2024-03-15', 4, 4, 9),
-(5, '2024-03-08', '2024-03-09', 5, 5, 9);
+INSERT INTO `reservationdetails` (`reservationdetailsID`, `createDate`, `expiryDate`, `numofItems`, `totalAmount`, `studentID`, `items`) VALUES
+(1, '2024-03-12', '2024-03-08', 1, 1, 9, 'wrqwer'),
+(2, '2024-03-13', '2024-03-08', 2, 33, 9, 'rewer'),
+(3, '2024-03-06', '2024-03-09', 3, 3, 9, 'rqwerer'),
+(4, '2024-03-08', '2024-03-15', 4, 4, 9, 'rewrwerr'),
+(5, '2024-03-08', '2024-03-09', 5, 5, 9, 'rewrwer'),
+(8, '0000-00-00', '0000-00-00', 112, 121, 9, 'wrewerw');
 
 -- --------------------------------------------------------
 
@@ -157,23 +158,24 @@ CREATE TABLE `student` (
   `studentID` int(11) NOT NULL,
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
-  `uicEmail` varchar(250) NOT NULL
+  `uicEmail` varchar(250) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`studentID`, `firstName`, `lastName`, `uicEmail`) VALUES
-(4, 'lau', 'lapating', 'test4@uic.edu.ph'),
-(5, 'dos', 'dosdos', 'test5@uic.edu.ph'),
-(6, 'smbot', 'qweqw', 'sdfsdfsdfsd'),
-(7, '1321', '1232', '213112'),
-(8, 'lemwel', 'baysonnn', 'lemuelbayson@gmail.com'),
-(9, '1', 'dasdsas', 'dsaasdasad'),
-(11, '8', 'dasdasd', 'asdsadsd'),
-(12, 'angel', 'esperida', 'Angel@gmail.com'),
-(13, 'sample ', 'Sample2', 'Uic@gmail.com');
+INSERT INTO `student` (`studentID`, `firstName`, `lastName`, `uicEmail`, `password`) VALUES
+(4, 'lau', 'lapating', 'test4@uic.edu.ph', '312312'),
+(5, 'dos', 'dosdos', 'test5@uic.edu.ph', ''),
+(6, 'smbot', 'qweqw', 'sdfsdfsdfsd', ''),
+(7, '1321', '1232', '213112', ''),
+(8, 'lemwel', 'baysonnn', 'lemuelbayson@gmail.com', ''),
+(9, '1', 'dasdsas', 'dsaasdasad', ''),
+(11, '8', 'dasdasd', 'asdsadsd', ''),
+(12, 'angel', 'esperida', 'Angel@gmail.com', ''),
+(13, 'sample ', 'Sample2', 'Uic@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -222,7 +224,6 @@ CREATE TABLE `uniformdetails` (
 INSERT INTO `uniformdetails` (`uniformreservationID`, `reservationdetailsID`, `uniformID`, `uniformQuantity`) VALUES
 (1, 3, 1, 11),
 (2, 4, 1, 22),
-(3, 1, 3, 33),
 (4, 1, 5, 44),
 (5, 2, 1, 55);
 
@@ -305,7 +306,7 @@ ALTER TABLE `bookdetails`
 -- AUTO_INCREMENT for table `reservationdetails`
 --
 ALTER TABLE `reservationdetails`
-  MODIFY `reservationdetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `reservationdetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `student`
