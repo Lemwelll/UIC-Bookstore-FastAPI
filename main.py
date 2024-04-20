@@ -1,5 +1,7 @@
-# main.py
-from fastapi import FastAPI
+from time import time
+from fastapi import FastAPI, __version__
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
 from model.student import StudentRouter
 from model.book import BookRouter
 from model.uniform import UniformRouter
@@ -10,6 +12,7 @@ from model.bookdetails import BookdetailsRouter
 from model.uniformdetails import UniformdetailsRouter
 
 app = FastAPI()
+
 
 # Include CRUD routes from modules
 app.include_router(StudentRouter, prefix="/api")
