@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 05:36 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 22, 2024 at 04:30 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
   `adminID` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
@@ -61,7 +61,7 @@ CREATE TABLE `book` (
   `bookTitle` varchar(50) NOT NULL,
   `bookquantityAvailability` int(11) NOT NULL,
   `bookpriceDetails` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `book`
@@ -79,74 +79,31 @@ INSERT INTO `book` (`mngstore`, `bookID`, `mngbkstore`, `bookTitle`, `bookquanti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bookdetails`
---
-
-CREATE TABLE `bookdetails` (
-  `bookreservationID` int(11) NOT NULL,
-  `reservationdetailsID` int(11) NOT NULL,
-  `bookID` int(11) NOT NULL,
-  `bookQuantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `bookdetails`
---
-
-INSERT INTO `bookdetails` (`bookreservationID`, `reservationdetailsID`, `bookID`, `bookQuantity`) VALUES
-(1, 3, 1, 11),
-(3, 5, 8, 33),
-(4, 1, 5, 44),
-(5, 2, 7, 55);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reservation`
---
-
-CREATE TABLE `reservation` (
-  `reservationdetailsID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservation`
---
-
-INSERT INTO `reservation` (`reservationdetailsID`) VALUES
-(1),
-(1),
-(2),
-(2),
-(4);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `reservationdetails`
 --
 
 CREATE TABLE `reservationdetails` (
+  `createDate` longtext NOT NULL,
   `reservationdetailsID` int(11) NOT NULL,
-  `createDate` date NOT NULL,
   `expiryDate` date NOT NULL,
   `numofItems` int(11) NOT NULL,
   `totalAmount` int(11) NOT NULL,
   `studentID` int(11) NOT NULL,
-  `items` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `items` longtext NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reservationdetails`
 --
 
-INSERT INTO `reservationdetails` (`reservationdetailsID`, `createDate`, `expiryDate`, `numofItems`, `totalAmount`, `studentID`, `items`) VALUES
-(1, '2024-03-12', '2024-03-08', 1, 1, 9, 'wrqwer'),
-(2, '2024-03-13', '2024-03-08', 2, 33, 9, 'rewer'),
-(3, '2024-03-06', '2024-03-09', 3, 3, 9, 'rqwerer'),
-(4, '2024-03-08', '2024-03-15', 4, 4, 9, 'rewrwerr'),
-(5, '2024-03-08', '2024-03-09', 5, 5, 9, 'rewrwer'),
-(8, '0000-00-00', '0000-00-00', 112, 121, 9, 'wrewerw');
+INSERT INTO `reservationdetails` (`createDate`, `reservationdetailsID`, `expiryDate`, `numofItems`, `totalAmount`, `studentID`, `items`, `status`) VALUES
+('Mon Apr 22 2024 20:27:00 GMT+0800 (China Standard Time)', 27, '0000-00-00', 6, 13986, 123123123, '\"[{\\\"id\\\":1,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":12321,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"}]\"', 'pending'),
+('Mon Apr 22 2024 20:34:07 GMT+0800 (China Standard Time)', 28, '0000-00-00', 5, 1665, 123123123, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"}]\"', 'pending'),
+('Mon Apr 22 2024 21:47:10 GMT+0800 (China Standard Time)', 29, '0000-00-00', 7, 5899, 123123123, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"pharm\\\",\\\"price\\\":121,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":8,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsaddsadadasd\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'pending'),
+('Mon Apr 22 2024 21:48:19 GMT+0800 (China Standard Time)', 30, '0000-00-00', 7, 5788, 123123123, '\"[{\\\"id\\\":8,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsaddsadadasd\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev3\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"pharm\\\",\\\"price\\\":121,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'pending'),
+('Mon Apr 22 2024 21:48:33 GMT+0800 (China Standard Time)', 31, '0000-00-00', 1, 111, 123123123, '\"[{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"}]\"', 'pending'),
+('Mon Apr 22 2024 21:52:12 GMT+0800 (China Standard Time)', 32, '0000-00-00', 5, 5556, 123123123, '\"[{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev3\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":8,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsaddsadadasd\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'pending');
 
 -- --------------------------------------------------------
 
@@ -160,22 +117,14 @@ CREATE TABLE `student` (
   `lastName` varchar(100) NOT NULL,
   `uicEmail` varchar(250) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`studentID`, `firstName`, `lastName`, `uicEmail`, `password`) VALUES
-(4, 'lau', 'lapating', 'test4@uic.edu.ph', '312312'),
-(5, 'dos', 'dosdos', 'test5@uic.edu.ph', ''),
-(6, 'smbot', 'qweqw', 'sdfsdfsdfsd', ''),
-(7, '1321', '1232', '213112', ''),
-(8, 'lemwel', 'baysonnn', 'lemuelbayson@gmail.com', ''),
-(9, '1', 'dasdsas', 'dsaasdasad', ''),
-(11, '8', 'dasdasd', 'asdsadsd', ''),
-(12, 'angel', 'esperida', 'Angel@gmail.com', ''),
-(13, 'sample ', 'Sample2', 'Uic@gmail.com', '');
+(1, 'Raldin', 'Casidar', 'raldin.disomimba13@gmail.com', 'dindin23');
 
 -- --------------------------------------------------------
 
@@ -190,7 +139,7 @@ CREATE TABLE `uniform` (
   `size` varchar(30) NOT NULL,
   `uniformQuantityAvailability` int(11) NOT NULL,
   `uniformPriceDetails` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `uniform`
@@ -215,7 +164,7 @@ CREATE TABLE `uniformdetails` (
   `reservationdetailsID` int(11) NOT NULL,
   `uniformID` int(11) NOT NULL,
   `uniformQuantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `uniformdetails`
@@ -245,25 +194,10 @@ ALTER TABLE `book`
   ADD KEY `mngstore` (`mngstore`);
 
 --
--- Indexes for table `bookdetails`
---
-ALTER TABLE `bookdetails`
-  ADD PRIMARY KEY (`bookreservationID`),
-  ADD KEY `reservationdetailsID` (`reservationdetailsID`),
-  ADD KEY `bookID` (`bookID`);
-
---
--- Indexes for table `reservation`
---
-ALTER TABLE `reservation`
-  ADD KEY `reservationdetailsID` (`reservationdetailsID`);
-
---
 -- Indexes for table `reservationdetails`
 --
 ALTER TABLE `reservationdetails`
-  ADD PRIMARY KEY (`reservationdetailsID`),
-  ADD KEY `studentID` (`studentID`);
+  ADD PRIMARY KEY (`reservationdetailsID`);
 
 --
 -- Indexes for table `student`
@@ -283,7 +217,6 @@ ALTER TABLE `uniform`
 --
 ALTER TABLE `uniformdetails`
   ADD PRIMARY KEY (`uniformreservationID`),
-  ADD KEY `uniformdetails_ibfk_1` (`reservationdetailsID`),
   ADD KEY `uniformID` (`uniformID`);
 
 --
@@ -297,22 +230,16 @@ ALTER TABLE `book`
   MODIFY `bookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `bookdetails`
---
-ALTER TABLE `bookdetails`
-  MODIFY `bookreservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `reservationdetails`
 --
 ALTER TABLE `reservationdetails`
-  MODIFY `reservationdetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `reservationdetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `uniform`
@@ -337,36 +264,10 @@ ALTER TABLE `book`
   ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`mngstore`) REFERENCES `admin` (`mngstore`);
 
 --
--- Constraints for table `bookdetails`
---
-ALTER TABLE `bookdetails`
-  ADD CONSTRAINT `bookdetails_ibfk_1` FOREIGN KEY (`reservationdetailsID`) REFERENCES `reservationdetails` (`reservationdetailsID`),
-  ADD CONSTRAINT `bookdetails_ibfk_2` FOREIGN KEY (`bookID`) REFERENCES `book` (`bookID`);
-
---
--- Constraints for table `reservation`
---
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`reservationdetailsID`) REFERENCES `reservationdetails` (`reservationdetailsID`);
-
---
--- Constraints for table `reservationdetails`
---
-ALTER TABLE `reservationdetails`
-  ADD CONSTRAINT `reservationdetails_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`);
-
---
 -- Constraints for table `uniform`
 --
 ALTER TABLE `uniform`
   ADD CONSTRAINT `uniform_ibfk_1` FOREIGN KEY (`mngstore`) REFERENCES `admin` (`mngstore`);
-
---
--- Constraints for table `uniformdetails`
---
-ALTER TABLE `uniformdetails`
-  ADD CONSTRAINT `uniformdetails_ibfk_1` FOREIGN KEY (`reservationdetailsID`) REFERENCES `reservationdetails` (`reservationdetailsID`),
-  ADD CONSTRAINT `uniformdetails_ibfk_2` FOREIGN KEY (`uniformID`) REFERENCES `uniform` (`uniformID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

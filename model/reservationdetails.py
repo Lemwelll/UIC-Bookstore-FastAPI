@@ -1,6 +1,7 @@
 # model/reservationdetails.py
 from fastapi import Depends, HTTPException, APIRouter, Form, Body
 from .db import get_db
+import json
 
 ReservationdetailsRouter = APIRouter(tags=["Reservation Details"])
 
@@ -10,9 +11,25 @@ ReservationdetailsRouter = APIRouter(tags=["Reservation Details"])
 async def read_reservations(
     db=Depends(get_db)
 ):
-    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID, items FROM reservationdetails"
+    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID, items, status FROM reservationdetails"
     db[0].execute(query)
-    reservations = [{"reservationdetailsID": reservation[0], "createDate": reservation[1], "expiryDate": reservation[2], "numofItems": reservation[3], "totalAmount": reservation[4], "studentID": reservation[5], "items": reservation[6]} for reservation in db[0].fetchall()]
+    reservations = [{
+        # "reservationdetailsID": reservation[0], 
+        # "createDate": reservation[1], 
+        # "expiryDate": reservation[2], 
+        # "numofItems": reservation[3], 
+        # "totalAmount": reservation[4], 
+        # "studentID": reservation[5], 
+        # "items": reservation[6]
+
+        "id": reservation[0],
+        "items": reservation[6],
+        "total": reservation[4],
+        "date": reservation[1],
+        "student": reservation[5],
+        "studentName": "John Doe",
+        "status": reservation[7]
+    } for reservation in db[0].fetchall()]
     return reservations
 
 @ReservationdetailsRouter.get("/reservationdetails/{reservation_id}", response_model=dict)
@@ -28,18 +45,19 @@ async def read_reservation_by_id(
     raise HTTPException(status_code=404, detail="Reservation not found")
 
 
-@ReservationdetailsRouter.post("/reservationdetails/", response_model=dict)
+@ReservationdetailsRouter.post("/reservationdetails/", response_model=dict, responses={400: {"description": "Bad Request"}, 413: {"description": "Payload Too Large"}})
 async def create_reservation(
-    createDate: str = Body(...), 
-    expiryDate: str = Body(...), 
-    numofItems: int = Body(...),
-    totalAmount: int = Body(...),
-    studentID: int = Body(...),
-    items: list[dict] = Body(...),  # expect a list of dictionary, each dictionary containing 'bookID' and 'quantity'
-    db=Depends(get_db)
+    createDate: str = Form(...), 
+    expiryDate: str = Form(...), 
+    numofItems: int = Form(...),
+    totalAmount: int = Form(...),
+    studentID: int = Form(...),
+    items: str = Form(...),  # expect a list of dictionary, each dictionary containing 'bookID' and 'quantity'
+    db=Depends(get_db),
 ):
     query = "INSERT INTO reservationdetails (createDate, expiryDate, numofItems, totalAmount, studentID, items) VALUES (%s, %s, %s, %s, %s, %s)"
-    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, items))
+    items_str = json.dumps(items)
+    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, items_str))
     db[1].commit()
 
     # Retrieve the last inserted ID using LAST_INSERT_ID()
@@ -54,7 +72,6 @@ async def create_reservation(
         "studentID": studentID,
         "items": items
     }
-
 @ReservationdetailsRouter.put("/reservationdetails/{reservationdetailsID}", response_model=dict)
 async def update_reservation(
     reservationdetailsID: int,
@@ -67,7 +84,8 @@ async def update_reservation(
     db=Depends(get_db)
 ):
     query = "UPDATE reservationdetails SET createDate = %s, expiryDate = %s, numofItems = %s, totalAmount = %s, studentID = %s, items = %s WHERE reservationdetailsID = %s"
-    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, items, reservationdetailsID))
+    items_str = json.dumps(items)
+    db[0].execute(query, (createDate, expiryDate, numofItems, totalAmount, studentID, items_str, reservationdetailsID))
 
     # Check if the update was successful
     if db[0].rowcount > 0:
