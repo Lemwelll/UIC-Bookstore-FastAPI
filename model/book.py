@@ -12,7 +12,21 @@ async def read_books(
 ):
     query = "SELECT mngstore, bookID, mngbkstore, bookTitle, bookquantityAvailability, bookpriceDetails FROM book"
     db[0].execute(query)
-    books = [{"mngstore": book[0], "bookID": book[1], "mngbkstore": book[2], "bookTitle": book[3], "bookquantityAvailability": book[4], "bookpriceDetails": book[5]} for book in db[0].fetchall()]
+    books = [{
+        # "mngstore": book[0], 
+        # "bookID": book[1], 
+        # "mngbkstore": book[2], 
+        # "bookTitle": book[3], 
+        # "bookquantityAvailability": book[4], 
+        # "bookpriceDetails": book[5]
+
+        "id": book[1],
+        "category": "book",
+        "name": book[3],
+        "price": book[5],
+        "stock": book[4],
+        "image": ""
+    } for book in db[0].fetchall()]
     return books
 
 @BookRouter.get("/book/{book_id}", response_model=dict)

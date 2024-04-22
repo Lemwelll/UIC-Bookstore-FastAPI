@@ -1,5 +1,5 @@
 # model/reservationdetails.py
-from fastapi import Depends, HTTPException, APIRouter, Form
+from fastapi import Depends, HTTPException, APIRouter, Form, Body
 from .db import get_db
 
 ReservationdetailsRouter = APIRouter(tags=["Reservation Details"])
@@ -27,14 +27,15 @@ async def read_reservation_by_id(
         return {"reservationdetailsID": reservationdetails[0], "createDate": reservationdetails[1], "expiryDate": reservationdetails[2], "numofItems": reservationdetails[3], "totalAmount": reservationdetails[4], "studentID": reservationdetails[5], "items": reservationdetails[6]}
     raise HTTPException(status_code=404, detail="Reservation not found")
 
+
 @ReservationdetailsRouter.post("/reservationdetails/", response_model=dict)
 async def create_reservation(
-    createDate: str = Form(...), 
-    expiryDate: str = Form(...), 
-    numofItems: int = Form(...),
-    totalAmount: int = Form(...),
-    studentID: int = Form(...),
-    items: str = Form(...),
+    createDate: str = Body(...), 
+    expiryDate: str = Body(...), 
+    numofItems: int = Body(...),
+    totalAmount: int = Body(...),
+    studentID: int = Body(...),
+    items: list[dict] = Body(...),  # expect a list of dictionary, each dictionary containing 'bookID' and 'quantity'
     db=Depends(get_db)
 ):
     query = "INSERT INTO reservationdetails (createDate, expiryDate, numofItems, totalAmount, studentID, items) VALUES (%s, %s, %s, %s, %s, %s)"

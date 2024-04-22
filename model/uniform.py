@@ -12,7 +12,21 @@ async def read_uniforms(
 ):
     query = "SELECT mngstore, uniformID, type, size, uniformQuantityAvailability, uniformPriceDetails FROM uniform"
     db[0].execute(query)
-    uniforms = [{"mngstore": uniform[0], "uniformID": uniform[1], "type": uniform[2], "size": uniform[3], "uniformQuantityAvailability": uniform[4], "uniformPriceDetails": uniform[5]} for uniform in db[0].fetchall()]
+    uniforms = [{
+        # "mngstore": uniform[0], 
+        # "uniformID": uniform[1], 
+        # "type": uniform[2], 
+        # "size": uniform[3], 
+        # "uniformQuantityAvailability": uniform[4], 
+        # "uniformPriceDetails": uniform[5], 
+        "id": uniform[1],
+        "category": "uniform",
+        "name": "School Uniform (" + str(uniform[2]) + ")",
+        "price": uniform[5],
+        "stock": uniform[4],
+        "size": uniform[3],
+        "image": ""
+    } for uniform in db[0].fetchall()]
     return uniforms
 
 @UniformRouter.get("/uniform/{uniform_id}", response_model=dict)

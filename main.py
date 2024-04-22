@@ -8,8 +8,17 @@ from model.reservation import ReservationRouter
 from model.reservationdetails import ReservationdetailsRouter
 from model.bookdetails import BookdetailsRouter
 from model.uniformdetails import UniformdetailsRouter
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include CRUD routes from modules
 app.include_router(StudentRouter, prefix="/api")
