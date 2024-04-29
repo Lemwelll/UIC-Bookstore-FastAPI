@@ -15,6 +15,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:8000"],
+    allow_methods=["*"],
 )
 
 # Include CRUD routes from modules
