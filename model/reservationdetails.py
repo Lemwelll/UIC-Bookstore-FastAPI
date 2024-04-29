@@ -11,7 +11,22 @@ ReservationdetailsRouter = APIRouter(tags=["Reservation Details"])
 async def read_reservations(
     db=Depends(get_db)
 ):
-    query = "SELECT reservationdetailsID, createDate, expiryDate, numofItems, totalAmount, studentID, items, status FROM reservationdetails"
+    query = """
+        SELECT 
+            rd.reservationdetailsID, 
+            rd.createDate, 
+            rd.expiryDate, 
+            rd.numofItems, 
+            rd.totalAmount, 
+            rd.studentID, 
+            rd.items, 
+            rd.status, 
+            s.firstname, 
+            s.lastname 
+        FROM 
+            reservationdetails rd 
+            LEFT JOIN student s ON rd.studentID = s.studentID
+    """
     db[0].execute(query)
     reservations = [{
         # "reservationdetailsID": reservation[0], 
@@ -27,7 +42,7 @@ async def read_reservations(
         "total": reservation[4],
         "date": reservation[1],
         "student": reservation[5],
-        "studentName": "John Doe",
+        "studentName": reservation[8] + " " + reservation[9],
         "status": reservation[7]
     } for reservation in db[0].fetchall()]
     return reservations
@@ -94,6 +109,22 @@ async def update_reservation(
     
     # If no rows were affected, reservation details not found
     raise HTTPException(status_code=404, detail="Reservation details not found")
+@ReservationdetailsRouter.put("/reservationdetails/status/{reservationdetailsID}", response_model=dict)
+async def set_reservation_status(
+    reservationdetailsID: int,
+    status: str = Form(...), 
+    db=Depends(get_db)
+):
+    query = "UPDATE reservationdetails SET status = %s WHERE reservationdetailsID = %s"
+    db[0].execute(query, (status, reservationdetailsID))
+
+    # Check if the update was successful
+    if db[0].rowcount > 0:
+        db[1].commit()
+        return {"message": "Reservation status updated successfully"}
+    
+    # If no rows were affected, reservation details not found
+    raise HTTPException(status_code=404, detail="Reservation details not found")
 
 @ReservationdetailsRouter.delete("/reservationdetails/{reservationdetailsID}", response_model=dict)
 async def delete_reservation(
@@ -114,7 +145,7 @@ async def delete_reservation(
         db[0].execute(query_delete_reservation, (reservationdetailsID,))
         db[1].commit()
 
-        return {"message": "Reservation details deleted successfully"}
+        return {"success": True, "message": "Reservation details deleted successfully"}
     except Exception as e:
         # Handle other exceptions if necessary
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
