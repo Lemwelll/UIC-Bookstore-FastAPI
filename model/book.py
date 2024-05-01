@@ -25,7 +25,8 @@ async def read_books(
         "name": book[3],
         "price": book[5],
         "stock": book[4],
-        "image": ""
+        "image": "",
+        "mngstore": book[0],
     } for book in db[0].fetchall()]
     return books
 

@@ -21,11 +21,12 @@ async def read_uniforms(
         # "uniformPriceDetails": uniform[5], 
         "id": uniform[1],
         "category": "uniform",
-        "name": "School Uniform (" + str(uniform[2]) + ")",
+        "name": uniform[2],
         "price": uniform[5],
         "stock": uniform[4],
         "size": uniform[3],
-        "image": ""
+        "image": "",
+        "mngstore": uniform[0],
     } for uniform in db[0].fetchall()]
     return uniforms
 
