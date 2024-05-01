@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 04:30 PM
+-- Generation Time: May 01, 2024 at 02:34 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`mngstore`, `adminID`, `username`, `password`) VALUES
-('', '', '', ''),
+('', '1', 'admin', 'admin'),
 ('qweq', 'eqwwq', 'ewq', 'eqweqw'),
 ('test1', '1111', 'admin1', '1111'),
 ('test2', '2222', 'admin2', '2222'),
@@ -68,13 +68,10 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`mngstore`, `bookID`, `mngbkstore`, `bookTitle`, `bookquantityAvailability`, `bookpriceDetails`) VALUES
-('test1', 1, 'sddadasd', 'pharm', 12332, 121),
 ('test1', 2, '11', 'testdev', 1, 111),
 ('test3', 3, '33', 'testdev3', 3, 333),
-('test4', 4, '44', 'testdev4', 4, 444),
 ('test5', 5, '55', 'testdev5', 5, 555),
-('test5', 7, 'dsada', 'dsadsad', 123, 2112),
-('test1', 8, 'dsad', 'dsadsaddsadadasd', 123, 2112);
+('test5', 7, 'dsada', 'dsadsad', 123, 2112);
 
 -- --------------------------------------------------------
 
@@ -98,12 +95,16 @@ CREATE TABLE `reservationdetails` (
 --
 
 INSERT INTO `reservationdetails` (`createDate`, `reservationdetailsID`, `expiryDate`, `numofItems`, `totalAmount`, `studentID`, `items`, `status`) VALUES
-('Mon Apr 22 2024 20:27:00 GMT+0800 (China Standard Time)', 27, '0000-00-00', 6, 13986, 123123123, '\"[{\\\"id\\\":1,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":12321,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"}]\"', 'pending'),
-('Mon Apr 22 2024 20:34:07 GMT+0800 (China Standard Time)', 28, '0000-00-00', 5, 1665, 123123123, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"}]\"', 'pending'),
-('Mon Apr 22 2024 21:47:10 GMT+0800 (China Standard Time)', 29, '0000-00-00', 7, 5899, 123123123, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"pharm\\\",\\\"price\\\":121,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":8,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsaddsadadasd\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'pending'),
-('Mon Apr 22 2024 21:48:19 GMT+0800 (China Standard Time)', 30, '0000-00-00', 7, 5788, 123123123, '\"[{\\\"id\\\":8,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsaddsadadasd\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev3\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"pharm\\\",\\\"price\\\":121,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'pending'),
-('Mon Apr 22 2024 21:48:33 GMT+0800 (China Standard Time)', 31, '0000-00-00', 1, 111, 123123123, '\"[{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"}]\"', 'pending'),
-('Mon Apr 22 2024 21:52:12 GMT+0800 (China Standard Time)', 32, '0000-00-00', 5, 5556, 123123123, '\"[{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev3\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":8,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsaddsadadasd\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'pending');
+('Mon Apr 29 2024 11:01:50 GMT+0800 (China Standard Time)', 36, '0000-00-00', 7, 4342, 3, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"pharm\\\",\\\"price\\\":121,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'completed'),
+('Mon Apr 29 2024 11:04:47 GMT+0800 (China Standard Time)', 37, '0000-00-00', 7, 1897, 2, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"pharm\\\",\\\"price\\\":121,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"}]\"', 'completed'),
+('Mon Apr 29 2024 11:16:43 GMT+0800 (China Standard Time)', 38, '0000-00-00', 3, 666, 2, '\"[{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"}]\"', 'completed'),
+('Mon Apr 29 2024 11:17:38 GMT+0800 (China Standard Time)', 39, '0000-00-00', 1, 222, 2, '\"[{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"}]\"', 'completed'),
+('Mon Apr 29 2024 11:17:45 GMT+0800 (China Standard Time)', 40, '0000-00-00', 3, 1110, 2, '\"[{\\\"id\\\":5,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (Polo)\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"size\\\":\\\"XL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":6,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"size\\\":\\\"XXL\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"}]\"', 'completed'),
+('Mon Apr 29 2024 11:19:24 GMT+0800 (China Standard Time)', 41, '0000-00-00', 3, 12654, 2, '\"[{\\\"id\\\":1,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":12321,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"}]\"', 'declined'),
+('Mon Apr 29 2024 11:19:57 GMT+0800 (China Standard Time)', 42, '0000-00-00', 2, 24642, 2, '\"[{\\\"id\\\":1,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":12321,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":1,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":12321,\\\"stock\\\":1,\\\"size\\\":\\\"XXXL\\\",\\\"image\\\":\\\"\\\"}]\"', 'declined'),
+('Mon Apr 29 2024 11:39:51 GMT+0800 (China Standard Time)', 43, '0000-00-00', 4, 1554, 1, '\"[{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev3\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'declined'),
+('Mon Apr 29 2024 11:46:58 GMT+0800 (China Standard Time)', 44, '0000-00-00', 4, 999, 1, '\"[{\\\"id\\\":2,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":111,\\\"stock\\\":1,\\\"size\\\":\\\"M\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":3,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (uniform)\\\",\\\"price\\\":222,\\\"stock\\\":1,\\\"size\\\":\\\"S\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"L\\\",\\\"image\\\":\\\"\\\"},{\\\"id\\\":4,\\\"category\\\":\\\"uniform\\\",\\\"name\\\":\\\"School Uniform (PE)\\\",\\\"price\\\":333,\\\"stock\\\":1,\\\"size\\\":\\\"XXXL\\\",\\\"image\\\":\\\"\\\"}]\"', 'completed'),
+('Mon Apr 29 2024 11:47:55 GMT+0800 (China Standard Time)', 45, '0000-00-00', 3, 3111, 1, '\"[{\\\"id\\\":4,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev4\\\",\\\"price\\\":444,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":5,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"testdev5\\\",\\\"price\\\":555,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"},{\\\"id\\\":7,\\\"category\\\":\\\"book\\\",\\\"name\\\":\\\"dsadsad\\\",\\\"price\\\":2112,\\\"stock\\\":1,\\\"image\\\":\\\"\\\"}]\"', 'completed');
 
 -- --------------------------------------------------------
 
@@ -124,7 +125,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`studentID`, `firstName`, `lastName`, `uicEmail`, `password`) VALUES
-(1, 'Raldin', 'Casidar', 'raldin.disomimba13@gmail.com', 'dindin23');
+(1, 'Raldin', 'Casidar', 'raldin.disomimba13@gmail.com', 'dindin23'),
+(2, 'Juan', 'Luna', 'marasigan@gmail.com', 'dindin23'),
+(3, 'Sheen', 'Lee', 'sheenlee@gmail.com', 'dindin23');
 
 -- --------------------------------------------------------
 
@@ -146,12 +149,12 @@ CREATE TABLE `uniform` (
 --
 
 INSERT INTO `uniform` (`mngstore`, `uniformID`, `type`, `size`, `uniformQuantityAvailability`, `uniformPriceDetails`) VALUES
-('test1', 1, 'PE', 'M', 213, 12321),
 ('test1', 2, 'uniform', 'M', 1, 111),
 ('test2', 3, 'uniform', 'S', 22, 222),
 ('test3', 4, 'PE', 'L', 3, 333),
 ('test4', 5, 'Polo', 'XL', 4, 444),
-('test5', 6, 'PE', 'XXL', 5, 555);
+('test5', 6, 'PE', 'XXL', 5, 555),
+('test', 13, 'PE22', 'XL', 1, 50);
 
 -- --------------------------------------------------------
 
@@ -233,41 +236,25 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `reservationdetails`
 --
 ALTER TABLE `reservationdetails`
-  MODIFY `reservationdetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `reservationdetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `uniform`
 --
 ALTER TABLE `uniform`
-  MODIFY `uniformID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `uniformID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `uniformdetails`
 --
 ALTER TABLE `uniformdetails`
   MODIFY `uniformreservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `book`
---
-ALTER TABLE `book`
-  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`mngstore`) REFERENCES `admin` (`mngstore`);
-
---
--- Constraints for table `uniform`
---
-ALTER TABLE `uniform`
-  ADD CONSTRAINT `uniform_ibfk_1` FOREIGN KEY (`mngstore`) REFERENCES `admin` (`mngstore`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
