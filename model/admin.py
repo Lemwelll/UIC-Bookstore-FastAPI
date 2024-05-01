@@ -45,6 +45,21 @@ async def create_admin(
 
     return {"adminID": new_admin_id, "mngstore": mngstore, "adminID": adminID, "username": username, "password": password}
 
+@AdminRouter.post("/admin/login", response_model=dict)
+async def login_admin(
+    username: str = Form(...),
+    password: str = Form(...),
+    db=Depends(get_db)
+):
+    query = "SELECT mngstore, adminID, username, password FROM admin WHERE username = %s AND password = %s"
+    db[0].execute(query, (username, password))
+    admin = db[0].fetchone()
+
+    if not admin:
+        return {"message": "Invalid username or password"}
+    
+    return {"adminID": admin[1], "mngstore": admin[0], "username": admin[2]}
+
 @AdminRouter.put("/admin/{admin_id}", response_model=dict)
 async def update_admin(
     admin_id: str,
