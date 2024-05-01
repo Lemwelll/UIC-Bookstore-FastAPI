@@ -6,6 +6,48 @@ import json
 ReservationdetailsRouter = APIRouter(tags=["Reservation Details"])
 
 # CRUD operations
+@ReservationdetailsRouter.post("/reservationdetails/{reservation_id}", response_model=list)
+async def read_reservations_by_studentID(
+    reservation_id: int,
+    db=Depends(get_db)
+):
+    query = """
+        SELECT 
+            rd.reservationdetailsID, 
+            rd.createDate, 
+            rd.expiryDate, 
+            rd.numofItems, 
+            rd.totalAmount, 
+            rd.studentID, 
+            rd.items, 
+            rd.status, 
+            s.firstname, 
+            s.lastname 
+        FROM 
+            reservationdetails rd 
+            LEFT JOIN student s ON rd.studentID = s.studentID
+        WHERE
+            rd.studentID=%s
+    """
+    db[0].execute(query,(reservation_id,))
+    reservations = [{
+        # "reservationdetailsID": reservation[0], 
+        # "createDate": reservation[1], 
+        # "expiryDate": reservation[2], 
+        # "numofItems": reservation[3], 
+        # "totalAmount": reservation[4], 
+        # "studentID": reservation[5], 
+        # "items": reservation[6]
+
+        "id": reservation[0],
+        "items": reservation[6],
+        "total": reservation[4],
+        "date": reservation[1],
+        "student": reservation[5],
+        "studentName": reservation[8] + " " + reservation[9],
+        "status": reservation[7]
+    } for reservation in db[0].fetchall()]
+    return reservations
 
 @ReservationdetailsRouter.get("/reservationdetails/", response_model=list)
 async def read_reservations(

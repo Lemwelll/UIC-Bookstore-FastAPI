@@ -2,9 +2,9 @@
 import mysql.connector
 
 db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "",
+    "host": "139.59.246.2",
+    "user": "thisisbookstore",
+    "password": "thisisgrp13",
     "database": "bookstore_grp13",
     "port": 3306,
 }
